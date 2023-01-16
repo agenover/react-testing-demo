@@ -8,7 +8,7 @@ render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="form" element={<Form />} />
+      <Route path="create-user" element={<Form />} />
     </Routes>
    
     

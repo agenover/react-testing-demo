@@ -9,7 +9,7 @@ export default function App() {
           paddingBottom: "1rem",
         }}
       >
-        <Link to="/form">Create a new form</Link>
+        <Link to="/create-user">Create a new form</Link>
       </nav>
     </div>
   );
