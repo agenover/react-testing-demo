@@ -1,16 +1,23 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function App() {
+  let navigate = useNavigate();
   return (
-    <div>
+    <main style={{ padding: "1rem"}}>
       <h1>Welcome to Coolform!</h1>
       <nav
         style={{
           paddingBottom: "1rem",
         }}
       >
-        <Link to="/create-user">Create a new form</Link>
+        <button onClick={() => {navigate("/create-user")}}>
+          Create New User
+        </button>
       </nav>
-    </div>
+    </main>
   );
 }
+
+// const createForm() {
+//   return <Link to="/create-user">Create a new form</Link>
+// }

@@ -1,9 +1,12 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Form() {
+    let navigate = useNavigate();
     return (
-      <main style={{ padding: "1rem 0" }}>
-        <Link to="/">Back to welcome page</Link>
+      <main style={{ padding: "1rem" }}>
+        <button onClick={() => {navigate("/")}}>
+          Back to home page
+        </button>
         <h2>Form</h2>
       </main>
     );
