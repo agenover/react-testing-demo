@@ -4,7 +4,7 @@ export default function Form() {
     let navigate = useNavigate();
     return (
       <main style={{ padding: "1rem" }}>
-        <button onClick={() => {navigate("/")}}>
+        <button onClick={() => {navigate("/home")}}>
           Back to home page
         </button>
         <h2>Form</h2>
