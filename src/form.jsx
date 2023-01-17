@@ -8,6 +8,7 @@ export default function Form() {
           Back to home page
         </button>
         <h2>Form</h2>
+        <button>Save Form</button>
       </main>
     );
   }
