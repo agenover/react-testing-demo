@@ -7,7 +7,9 @@ const rootElement = document.getElementById("root");
 render(
   <BrowserRouter>
     <Routes>
-      <Route path="/home" element={<App />} />
+      <Route path="/" element={<App />}>
+        <Route path="/home"></Route>
+      </Route>
       <Route path="create-user" element={<Form />} />
     </Routes>
    
