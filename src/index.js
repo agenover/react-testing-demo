@@ -1,7 +1,7 @@
 import { render } from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
-import Form from "./form";
+import CoolForm from "./form";
 
 const rootElement = document.getElementById("root");
 render(
@@ -10,10 +10,8 @@ render(
       <Route path="/" element={<App />}>
         <Route path="/home"></Route>
       </Route>
-      <Route path="create-user" element={<Form />} />
+      <Route path="create-user" element={<CoolForm />} />
     </Routes>
-   
-    
   </BrowserRouter>,
   rootElement
 );
