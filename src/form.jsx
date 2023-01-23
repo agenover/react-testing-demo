@@ -22,7 +22,7 @@ export default function CoolForm() {
           firstName: '',
           lastName: '',
           age: '',
-          gender: '',
+          gender: [],
           state: '',
           isPrivate: false,
           isPreferred: false,
@@ -30,42 +30,51 @@ export default function CoolForm() {
         }}
         validationSchema={Yup.object({
           firstName: Yup.string()
-            .required('Required')
+            .required('First Name is Required')
             .min(4, "First Name must be longer than 4 characters")
             .max(30, "First Name must be shorter than 30 characters"),
           lastName: Yup.string()
-            .required('Required')
+            .required('Last Name is Required')
             .min(4, "Last Name nust be longer than 4 characters")
             .max(30, "Last Name nust be shorter than 30 characters"),
           age: Yup.number()
-          .required()
-          .positive()
-          .integer('Age must be a number between 1 and 110'),
+            .required("Ages is required")
+            .positive()
+            .integer('Age must be a number between 1 and 110'),
+          gender: Yup.string()
+            .required("Gender is required"),
         })}
         onSubmit={(values) => (
           console.log(values)
         )}
       >
         {formik => (
-          <form onSubmit={formik.handleSubmit}>
+          <form onSubmit={formik.handleSubmit} className='container'>
+          <div className="container-fluid py-2">
             <label htmlFor="firstName"> First Name </label>
             <input id="" type='text' {...formik.getFieldProps('firstName')} />
               {formik.touched.firstName && formik.errors.firstName ? (
                 <div>{formik.errors.firstName}</div>
               ) : null}
-
+          </div>
+            
+          <div className="container-fluid py-2">
             <label htmlFor="lastName"> Last Name </label>
             <input id="" type='text'  {...formik.getFieldProps('lastName')} />
               {formik.touched.lastName && formik.errors.lastName ? (
                 <div>{formik.errors.lastName}</div>
               ) : null}
-
+          </div>
+            
+          <div className="container-fluid py-2">
             <label htmlFor="age"> Age </label>
             <input id="" type='text' {...formik.getFieldProps('age')} />
               {formik.touched.age && formik.errors.age ? (
                 <div>{formik.errors.age}</div>
               ) : null}
+          </div>
 
+          <div className="container-fluid py-2">
             <div htmlFor="gender"> Gender
               <label>
                 <Field type="radio" name="gender" value="male" />
@@ -80,18 +89,31 @@ export default function CoolForm() {
                 Other
               </label>
             </div>
+            <input id="" type='text' {...formik.getFieldProps('gender')} />
+              {formik.touched.gender && formik.errors.gender ? (
+                <div>{formik.errors.gender}</div>
+              ) : null}
+              </div>
 
-            <label htmlFor="state"> State </label>
-            <input id="" type='text' />
+              <div className="container-fluid py-2">
+              <label htmlFor="state"> State </label>
+              <input id="" type='text' />
+            </div>
 
+            <div className="container-fluid py-2">
             <label htmlFor="isPrivate"> Should profile be private </label>
-            <input id="" type='checkbox' />
+              <input id="" type='checkbox' />
+            </div>
 
-            <label htmlFor="isPreferred"> Is this the preferred profile </label>
-            <input id="" type='checkbox' />
+            <div className="container-fluid py-2">
+              <label htmlFor="isPreferred"> Is this the preferred profile </label>
+              <input id="" type='checkbox' />
+            </div>
 
-            <label htmlFor="description"> Add a description (optional) </label>
-            <input id="" type='text' {...formik.getFieldProps('description')} />
+            <div className="container-fluid py-2">
+              <label htmlFor="description"> Add a description (optional) </label>
+              <input id="" type='text' {...formik.getFieldProps('description')} />
+            </div>
 
             <button type='submit'>Save</button>
           </form>
