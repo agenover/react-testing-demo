@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Formik } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from 'yup';
 
 export default function CoolForm() {
@@ -42,76 +42,91 @@ export default function CoolForm() {
             .positive()
             .min(1, "Minimum age 1")
             .max(110, "Maximum age 110"),
-          isPreferred: Yup.boolean()
+          state: Yup.string()
+            .required("State is required"),
+          gender: Yup.string()
+            .required("gender is required")
         })}
         onSubmit={(values) => (
           console.log(values)
         )}
       >
         {formik => (
-          <form onSubmit={formik.handleSubmit} className='container'>
+          <Form onSubmit={formik.handleSubmit} className='container'>
             <div className="container-fluid">
-              <label htmlFor="firstName" className="p-2"> First Name </label>
-              <input id="" type='text' {...formik.getFieldProps('firstName')} />
-                {formik.touched.firstName && formik.errors.firstName ? (
-                  <div>{formik.errors.firstName}</div>
-                ) : null}
-            </div>
+              <label htmlFor="firstName" className="m-2"> First Name 
+                <Field id="" type='text' name="firstName" />
+                  {formik.touched.firstName && formik.errors.firstName ? (
+                    <div>{formik.errors.firstName}</div>
+                  ) : null}
+              </label>
               
-            <div className="container-fluid">
-              <label htmlFor="lastName" className="p-2"> Last Name </label>
-              <input id="" type='text'  {...formik.getFieldProps('lastName')} />
-                {formik.touched.lastName && formik.errors.lastName ? (
-                  <div>{formik.errors.lastName}</div>
-                ) : null}
             </div>
-              
             <div className="container-fluid">
-              <label htmlFor="age" className="p-2"> Age </label>
-              <input id="" type='text' {...formik.getFieldProps('age')} />
-                {formik.touched.age && formik.errors.age ? (
-                  <div>{formik.errors.age}</div>
-                ) : null}
+              <label htmlFor="lastName" className="m-2"> Last Name 
+                <Field id="" type='text' name="lastName" />
+                  {formik.touched.lastName && formik.errors.lastName ? (
+                    <div>{formik.errors.lastName}</div>
+                  ) : null}
+              </label>
             </div>
-
             <div className="container-fluid">
-              <div htmlFor="gender" className="p-2"> Gender
-                <label className="p-2">Male</label>
-                <input type="radio" name="gender" value="male" />
-                <label className="p-2">Female</label>
-                <input type="radio" name="gender" value="female" />
-                <label className="p-2">Other</label>
-                <input type="radio" name="gender" value="other" />
-              </div>
+              <label htmlFor="age" className="m-2"> Age 
+                <Field type='text' name="age" />
+                  {formik.touched.age && formik.errors.age ? (
+                    <div>{formik.errors.age}</div>
+                  ) : null}
+              </label>
             </div>
-
             <div className="container-fluid">
-              <label htmlFor="state" className="p-2"> State </label>
-                <input type="radio" name="state" value="living" />
-                <label className="p-2">Living</label>
-                <input type="radio" name="state" value="deceased" />
-                <label className="p-2">Deceased</label>
+              <div id="gender-radio-group">Gender</div>
+                <div aria-labelledby="gender-radio-group" role="group">
+                  <label className="m-2">
+                    <Field type="radio" name="gender" value="male"  className="m-2"/>
+                    Male
+                  </label>
+                  <label>
+                    <Field type="radio" name="gender" value="female"  className="m-2"/>
+                    Female
+                  </label>
+                  <label>
+                    <Field type="radio" name="gender" value="other"  className="m-2"/>
+                    Other
+                  </label>
+                  <div>{formik.errors.gender}</div>
+                </div>
             </div>
-
             <div className="container-fluid">
-              <label htmlFor="isPrivate" className="p-2"> Should profile be private </label>
-              <input id="" type='checkbox' {...formik.getFieldProps('isPrivate')}/>
+              <div id="state-radio-group">State</div>
+                <div aria-labelledby="state-radio-group" role="group">
+                  <label className="m-2">Living
+                    <Field type="radio" name="state" value="living" />
+                  </label>
+                  <label className="m-2">Deceased
+                    <Field type="radio" name="state" value="deceased" />
+                  </label>
+                  <div>{formik.errors.state}</div>
+                </div>
+            </div>
+            <div className="container-fluid">
+              <label htmlFor="isPrivate" className="m-2"> Should profile be private? </label>
+                <Field id="" type='checkbox' name="isPrivate"/>
               <div>{formik.errors.isPrivate}</div>
             </div>
-
             <div className="container-fluid">
-              <label htmlFor="isPreferred" className="p-2"> Is this the preferred profile </label>
-              <input id="" type='checkbox' {...formik.getFieldProps('isPreferred')} />
+              <label htmlFor="isPreferred" className="m-2"> Is this the preferred profile? </label>
+                <Field id="" type='checkbox' name="isPreferred" />
               <div>{formik.isPreferred}</div>
             </div>
-
             <div className="container-fluid">
-              <label htmlFor="description" className="p-2"> Add a description (optional) </label>
-              <input id="" type='text' {...formik.getFieldProps('description')} />
+              <label htmlFor="description" className="m-2"> Add a description (optional) 
+                <Field id="" type='text' name="description" />
+              </label>
             </div>
-
-            <button type='submit'>Save</button>
-          </form>
+            <div className="container-fluid m-2">
+              <button type='submit'>Save</button>
+            </div>
+          </Form>
         )}
       </Formik>
     );
