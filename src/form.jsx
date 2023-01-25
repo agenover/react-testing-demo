@@ -54,7 +54,7 @@ export default function CoolForm() {
         {formik => (
           <Form onSubmit={formik.handleSubmit} className='container'>
             <div className="container-fluid">
-              <label htmlFor="firstName" className="m-2"> First Name 
+              <label htmlFor="firstName" className="p-2"> First Name 
                 <Field id="" type='text' name="firstName" />
                   {formik.touched.firstName && formik.errors.firstName ? (
                     <div>{formik.errors.firstName}</div>
@@ -63,7 +63,7 @@ export default function CoolForm() {
               
             </div>
             <div className="container-fluid">
-              <label htmlFor="lastName" className="m-2"> Last Name 
+              <label htmlFor="lastName" className="p-2"> Last Name 
                 <Field id="" type='text' name="lastName" />
                   {formik.touched.lastName && formik.errors.lastName ? (
                     <div>{formik.errors.lastName}</div>
@@ -71,7 +71,7 @@ export default function CoolForm() {
               </label>
             </div>
             <div className="container-fluid">
-              <label htmlFor="age" className="m-2"> Age 
+              <label htmlFor="age" className="p-2"> Age 
                 <Field type='text' name="age" />
                   {formik.touched.age && formik.errors.age ? (
                     <div>{formik.errors.age}</div>
@@ -81,16 +81,16 @@ export default function CoolForm() {
             <div className="container-fluid">
               <div id="gender-radio-group">Gender</div>
                 <div aria-labelledby="gender-radio-group" role="group">
-                  <label className="m-2">
-                    <Field type="radio" name="gender" value="male"  className="m-2"/>
+                  <label className="p-2">
+                    <Field type="radio" name="gender" value="male"  className="p-2"/>
                     Male
                   </label>
                   <label>
-                    <Field type="radio" name="gender" value="female"  className="m-2"/>
+                    <Field type="radio" name="gender" value="female"  className="p-2"/>
                     Female
                   </label>
                   <label>
-                    <Field type="radio" name="gender" value="other"  className="m-2"/>
+                    <Field type="radio" name="gender" value="other"  className="p-2"/>
                     Other
                   </label>
                   <div>{formik.errors.gender}</div>
@@ -99,31 +99,31 @@ export default function CoolForm() {
             <div className="container-fluid">
               <div id="state-radio-group">State</div>
                 <div aria-labelledby="state-radio-group" role="group">
-                  <label className="m-2">Living
+                  <label className="p-2">Living
                     <Field type="radio" name="state" value="living" />
                   </label>
-                  <label className="m-2">Deceased
+                  <label className="p-2">Deceased
                     <Field type="radio" name="state" value="deceased" />
                   </label>
                   <div>{formik.errors.state}</div>
                 </div>
             </div>
             <div className="container-fluid">
-              <label htmlFor="isPrivate" className="m-2"> Should profile be private? </label>
+              <label htmlFor="isPrivate" className="p-2"> Should profile be private? </label>
                 <Field id="" type='checkbox' name="isPrivate"/>
               <div>{formik.errors.isPrivate}</div>
             </div>
             <div className="container-fluid">
-              <label htmlFor="isPreferred" className="m-2"> Is this the preferred profile? </label>
+              <label htmlFor="isPreferred" className="p-2"> Is this the preferred profile? </label>
                 <Field id="" type='checkbox' name="isPreferred" />
               <div>{formik.isPreferred}</div>
             </div>
             <div className="container-fluid">
-              <label htmlFor="description" className="m-2"> Add a description (optional) 
+              <label htmlFor="description" className="p-2"> Add a description (optional) 
                 <Field id="" type='text' name="description" />
               </label>
             </div>
-            <div className="container-fluid m-2">
+            <div className="container-fluid p-2">
               <button type='submit'>Save</button>
             </div>
           </Form>
