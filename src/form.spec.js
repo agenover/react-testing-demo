@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import CoolForm from "./form";
 import userEvent from "@testing-library/user-event"
@@ -39,9 +39,8 @@ describe('testing form', () => {
         expect(saveButton).toBeInTheDocument();
     });
 
-    it.only('when pressing save if required fields are not filled up should show required field message in all required fields', async () => {
+    it('when pressing save a required message should appear in required fields when left blank', async () => {
         const handleClick = jest.fn();
-        const user = userEvent.setup();
     
         render(
             <MemoryRouter>
@@ -50,38 +49,18 @@ describe('testing form', () => {
             )
     
         // Act
-        const firstName = screen.getByLabelText('First Name')
-        const lastName = screen.getByLabelText('Last Name')
-        const age = screen.getByText('Age')
-    
-        // await user.click(firstName)
-        // await user.click(lastName)
-        // await user.click(age)
-
-        // Tried to only press Save button to trigger all required alerts at once
         const saveButton = screen.getByText('Save')
-        await user.click(saveButton)
+        await userEvent.click(saveButton)
 
-        const firstNameRequired = screen.getByText('First Name is Required')
-        const lastNameRequired = screen.getByText('Last Name is Required')
-        const ageRequired = screen.getByText('Age is required')
-        const genderRequired = screen.getByText('gender is required')
-        const stateRequired = screen.getByText('State is required')
-
-        screen.debug();
-        // fireEvent.click(screen.getByText('Save'))
-    
         // Assert
-        expect(handleClick).not.toHaveBeenCalledTimes(1)
-        expect(firstNameRequired).toBeInTheDocument();
-        expect(lastNameRequired).toBeInTheDocument();
-        expect(ageRequired).toBeInTheDocument();
-        expect(genderRequired).toBeInTheDocument();
-        expect(stateRequired).toBeInTheDocument();
-
+        await screen.findByText("First Name is required")
+        await screen.findByText("Last Name is required")
+        await screen.findByText("Age is required")
+        await screen.findByText("gender is required")
+        await screen.findByText("State is required")
     });
     
-    it('when pressing save if required fields are filled up should print form in the console', async () => {
+    it('when pressing save and form completed should print form in the console', async () => {
     // Arrange
     const handleClick = jest.fn();
     
@@ -97,16 +76,28 @@ describe('testing form', () => {
     const age = screen.getByLabelText('Age')
     const gender = screen.getByText('Male')
     const state = screen.getByLabelText('Living')
+    const save = screen.getByText('Save')
 
     await userEvent.type(firstName, 'John')
     await userEvent.type(lastName, 'Smith')
     await userEvent.type(age, '21')
     await userEvent.click(gender)
-    screen.debug();
-    // fireEvent.click(screen.getByText('Save'))
+    await userEvent.click(state)
+
+    await userEvent.click(save)
 
     // Assert
     expect(handleClick).toHaveBeenCalledTimes(1)
+    expect(handleClick).toHaveBeenCalledWith({
+        firstName: 'John',
+        lastName: 'Smith',
+        state: 'living',
+        gender: 'male',
+        description: '',
+        age: '21',
+        isPreferred: false,
+        isPrivate: false,
+    })
 
     });
 })

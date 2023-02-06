@@ -31,13 +31,13 @@ export default function CoolForm({onSubmit = () => {}}) {
         }}
         validationSchema={Yup.object({
           firstName: Yup.string()
-            .required('First Name is Required')
+            .required('First Name is required')
             .min(4, "First Name must be longer than 4 characters")
             .max(30, "First Name must be shorter than 30 characters"),
           lastName: Yup.string()
-            .required('Last Name is Required')
-            .min(4, "Last Name nust be longer than 4 characters")
-            .max(30, "Last Name nust be shorter than 30 characters"),
+            .required('Last Name is required')
+            .min(4, "Last Name must be longer than 4 characters")
+            .max(30, "Last Name must be shorter than 30 characters"),
           age: Yup.number()
             .required("Age is required")
             .positive()
