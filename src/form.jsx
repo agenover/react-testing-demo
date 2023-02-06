@@ -3,7 +3,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from 'yup';
 import React from "react";
 
-export default function CoolForm() {
+export default function CoolForm({onSubmit = () => {}}) {
     let navigate = useNavigate();
     return (
       <main style={{ padding: "1rem" }}>
@@ -11,12 +11,12 @@ export default function CoolForm() {
           Back to home page
         </button>
         <h2>Form</h2>
-        <FormBlank />
+        <FormBlank onSubmit={onSubmit} />
       </main>
     );
   }
 
-  const FormBlank = () => {
+  const FormBlank = ({onSubmit = () => {}}) => {
     return (
       <Formik
         initialValues={{
@@ -39,7 +39,7 @@ export default function CoolForm() {
             .min(4, "Last Name nust be longer than 4 characters")
             .max(30, "Last Name nust be shorter than 30 characters"),
           age: Yup.number()
-            .required("Ages is required")
+            .required("Age is required")
             .positive()
             .min(1, "Minimum age 1")
             .max(110, "Maximum age 110"),
@@ -49,14 +49,14 @@ export default function CoolForm() {
             .required("gender is required")
         })}
         onSubmit={(values) => (
-          console.log(values)
+          onSubmit(values)
         )}
       >
         {formik => (
           <Form onSubmit={formik.handleSubmit} className='container'>
             <div className="container-fluid">
               <label htmlFor="firstName" className="p-2"> First Name 
-                <Field id="" type='text' name="firstName" />
+                <Field id="firstName" type='text' name="firstName" />
                   {formik.touched.firstName && formik.errors.firstName ? (
                     <div>{formik.errors.firstName}</div>
                   ) : null}
@@ -65,7 +65,7 @@ export default function CoolForm() {
             </div>
             <div className="container-fluid">
               <label htmlFor="lastName" className="p-2"> Last Name 
-                <Field id="" type='text' name="lastName" />
+                <Field id="lastName" type='text' name="lastName" />
                   {formik.touched.lastName && formik.errors.lastName ? (
                     <div>{formik.errors.lastName}</div>
                   ) : null}
@@ -73,7 +73,7 @@ export default function CoolForm() {
             </div>
             <div className="container-fluid">
               <label htmlFor="age" className="p-2"> Age 
-                <Field type='text' name="age" />
+                <Field id="age" type='text' name="age" />
                   {formik.touched.age && formik.errors.age ? (
                     <div>{formik.errors.age}</div>
                   ) : null}
