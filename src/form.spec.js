@@ -1,12 +1,29 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, BrowserRouter } from "react-router-dom";
 import CoolForm from "./form";
 import userEvent from "@testing-library/user-event"
+import * as router from 'react-router'
 
 describe('testing form', () => {
-    it('when in form page and clicking on back to home page it should get back to home page', () => {});
+    it('when in form page and clicking on back to home page it should get back to home page', async () => {
+        // Arrange
+        const navigate = jest.fn()
+        jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
+        render(
+            <MemoryRouter>
+                <CoolForm />
+            </MemoryRouter>
+        )
+        
+        // Act
+        const homePageButton = screen.getByText('Back to home page')
+        await userEvent.click(homePageButton)
+
+        // Assert
+        expect(navigate).toHaveBeenCalledWith('/home')
+    });
     
     it('when in form page the form should contain all the fields', async () => {
         // Arrange
