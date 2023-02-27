@@ -19,35 +19,8 @@ export default function CoolForm({onSubmit = () => {}}) {
   const FormBlank = ({onSubmit = () => {}}) => {
     return (
       <Formik
-        initialValues={{
-          firstName: '',
-          lastName: '',
-          age: '',
-          gender: '',
-          state: '',
-          isPrivate: false,
-          isPreferred: false,
-          description: '',
-        }}
-        validationSchema={Yup.object({
-          firstName: Yup.string()
-            .required('First Name is required')
-            .min(4, "First Name must be longer than 4 characters")
-            .max(30, "First Name must be shorter than 30 characters"),
-          lastName: Yup.string()
-            .required('Last Name is required')
-            .min(4, "Last Name must be longer than 4 characters")
-            .max(30, "Last Name must be shorter than 30 characters"),
-          age: Yup.number()
-            .required("Age is required")
-            .positive()
-            .min(1, "Minimum age 1")
-            .max(110, "Maximum age 110"),
-          state: Yup.string()
-            .required("State is required"),
-          gender: Yup.string()
-            .required("gender is required")
-        })}
+        initialValues= { initialValues }
+        validationSchema= { validationSchema }
         onSubmit={(values, {resetForm}) => {
           onSubmit(values);
           resetForm({ values: '' })
@@ -133,3 +106,36 @@ export default function CoolForm({onSubmit = () => {}}) {
       </Formik>
     );
   };
+
+
+
+const initialValues = {
+  firstName: '',
+  lastName: '',
+  age: '',
+  gender: '',
+  state: '',
+  isPrivate: false,
+  isPreferred: false,
+  description: '',
+}
+
+const validationSchema = Yup.object({
+  firstName: Yup.string()
+    .required('First Name is required')
+    .min(4, "First Name must be longer than 4 characters")
+    .max(30, "First Name must be shorter than 30 characters"),
+  lastName: Yup.string()
+    .required('Last Name is required')
+    .min(4, "Last Name must be longer than 4 characters")
+    .max(30, "Last Name must be shorter than 30 characters"),
+  age: Yup.number()
+    .required("Age is required")
+    .positive()
+    .min(1, "Minimum age 1")
+    .max(110, "Maximum age 110"),
+  state: Yup.string()
+    .required("State is required"),
+  gender: Yup.string()
+    .required("gender is required")
+})
