@@ -48,9 +48,10 @@ export default function CoolForm({onSubmit = () => {}}) {
           gender: Yup.string()
             .required("gender is required")
         })}
-        onSubmit={(values) => (
-          onSubmit(values)
-        )}
+        onSubmit={(values, {resetForm}) => {
+          onSubmit(values);
+          resetForm({ values: '' })
+        }}
       >
         {formik => (
           <Form onSubmit={formik.handleSubmit} className='container'>
