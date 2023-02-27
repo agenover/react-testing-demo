@@ -1,12 +1,13 @@
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import CoolForm from "./form";
 import 'bootstrap/dist/css/bootstrap.css';
 
-const rootElement = document.getElementById("root");
+const container = document.getElementById('root');
+const root = createRoot(container);
 const onSubmit = (values) => {console.log(values)}
-render(
+root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}>
@@ -14,6 +15,5 @@ render(
       </Route>
       <Route path="create-user" element={<CoolForm onSubmit={onSubmit}/>}/>
     </Routes>
-  </BrowserRouter>,
-  rootElement
+  </BrowserRouter>
 );
